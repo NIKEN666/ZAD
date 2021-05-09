@@ -1,5 +1,5 @@
 package com.company;
 
 public enum Producer {
-    KIA, CITOREN, SKODA, VOLKSWAGEN, TESLA, FORD
+    KIA, SKODA, VOLKSWAGEN, TESLA, CITROEN, SAMSUNG, XIOMI, NOKIA
 }

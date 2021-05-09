@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.devices.Car;
+import com.company.devices.Phone;
 
 import java.util.Date;
 import java.util.Objects;
@@ -11,16 +12,19 @@ public class Human {
     String position;
     private Double salary;
     Animal pet;
+    Phone phone;
     private Car car;
+    private Double cash = 20000.0;
 
-    public Human(String firstName, String lastName, String position) {
+    public Human(String firstName, String lastName, String position, Double salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
+        this.salary = salary;
     }
 
     public Double getSalary() {
-        System.out.println(new Date() + ": Pobraie danych o wypłacie");
+        System.out.println(new Date() + ": Pobrano informacje o wypłacie usera " + this.lastName);
         return salary;
     }
 
@@ -28,9 +32,27 @@ public class Human {
         return car;
     }
 
+    public void setCar(Car car) {
+        if (this.salary > car.getValue()) {
+            System.out.println("Super, kupiłeś auto za gotówkę" + car.toString());
+            this.car = car;
+        } else if (this.salary > 0.83 * car.getValue()) {
+            System.out.println("Kupiłeś auto, ale na raty");
+            this.car = car;
+        } else System.out.println("Sorry, musisz zarobić więcej!");
+    }
+
+    public Double getCash() {
+        return cash;
+    }
+
+    public void setCash(Double cash) {
+        this.cash = cash;
+    }
+
     public void setSalary(Double newSalary) {
         if (newSalary < 0) {
-            System.out.println("hahahah, nikt nie będzie dokładał ze swoich!\n");
+            System.out.println("hahahah, nikt nie będzie dokładał ze swoich!");
         } else {
             System.out.println("Dane o podwyżce wysłane do księgowości.");
             System.out.println("Aneks do odebrania u pani Hani.");
@@ -39,14 +61,27 @@ public class Human {
         }
     }
 
-    public void setCar(Car car) {
-        if (this.salary > car.getValue()){
-            System.out.println("Gratki, kupiłeś auto :) " + car.toString());
-            this.car = car;
-        } else if (this.salary > 0.83*car.getValue()){
-            System.out.println("Noooo a jednak, wziąłeś na kredyt...");
-            this.car = car;
-        } else System.out.println("No way! Skombinuj hajs!");
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public boolean hasCar(Car newCar) {
+        if (this.car == newCar) {
+            return true;
+        }
+        return false;
+    }
+
+    public void removeCar(){
+        this.car = null;
     }
 
     @Override
@@ -68,8 +103,9 @@ public class Human {
 
     @Override
     public String toString() {
-        return "First name: " + firstName +
-                ", last name: " + lastName +
+        return "Human: " +
+                firstName +
+                ' ' + lastName +
                 ", position: " + position;
     }
 }
